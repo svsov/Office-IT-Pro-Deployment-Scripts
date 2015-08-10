@@ -1,0 +1,375 @@
+﻿#ARTICLE_1 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 2051.359375px;
+    overflow-wrap: break-word;
+    width: 918px;
+    word-wrap: break-word;
+    perspective-origin: 459px 1025.671875px;
+    transform-origin: 459px 1025.671875px;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    outline: rgb(51, 51, 51) none 0px;
+    overflow: hidden;
+    padding: 30px;
+}/*#ARTICLE_1*/
+
+#H1_2 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 54.796875px;
+    overflow-wrap: break-word;
+    position: relative;
+    width: 858px;
+    word-wrap: break-word;
+    perspective-origin: 429px 27.390625px;
+    transform-origin: 429px 27.390625px;
+    border-top: 0px none rgb(51, 51, 51);
+    border-right: 0px none rgb(51, 51, 51);
+    border-bottom: 1px solid rgb(238, 238, 238);
+    border-left: 0px none rgb(51, 51, 51);
+    font: normal normal bold normal 36px/43.2000007629395px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    margin: 0px 0px 16px;
+    outline: rgb(51, 51, 51) none 0px;
+    padding: 0px 0px 10.8000001907349px;
+}/*#H1_2*/
+
+#A_3 {
+    box-sizing: border-box;
+    color: rgb(64, 120, 192);
+    display: block;
+    height: 0px;
+    left: 0px;
+    overflow-wrap: break-word;
+    position: absolute;
+    text-decoration: none;
+    top: 0px;
+    width: 36px;
+    word-wrap: break-word;
+    align-self: stretch;
+    perspective-origin: 18px 0px;
+    transform-origin: 18px 0px;
+    border: 0px none rgb(64, 120, 192);
+    font: normal normal bold normal 36px/36px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    margin: 0px 0px 0px -30px;
+    outline: rgb(64, 120, 192) none 0px;
+    padding: 0px 6px 0px 30px;
+}/*#A_3*/
+
+#SPAN_4, #SPAN_8, #SPAN_12, #SPAN_18, #SPAN_24, #SPAN_30, #SPAN_36, #SPAN_42, #SPAN_48, #SPAN_54, #SPAN_59, #SPAN_64 {
+    box-sizing: border-box;
+    display: none;
+    overflow-wrap: break-word;
+    vertical-align: middle;
+    word-wrap: break-word;
+    perspective-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    font: normal normal normal normal 16px/16px octicons;
+}/*#SPAN_4, #SPAN_8, #SPAN_12, #SPAN_18, #SPAN_24, #SPAN_30, #SPAN_36, #SPAN_42, #SPAN_48, #SPAN_54, #SPAN_59, #SPAN_64*/
+
+#SPAN_4:before, #SPAN_8:before, #SPAN_12:before, #SPAN_18:before, #SPAN_24:before, #SPAN_30:before, #SPAN_36:before, #SPAN_42:before, #SPAN_48:before, #SPAN_54:before, #SPAN_59:before, #SPAN_64:before {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    perspective-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    content: '""';
+    font: normal normal normal normal 16px/16px octicons;
+}/*#SPAN_4:before, #SPAN_8:before, #SPAN_12:before, #SPAN_18:before, #SPAN_24:before, #SPAN_30:before, #SPAN_36:before, #SPAN_42:before, #SPAN_48:before, #SPAN_54:before, #SPAN_59:before, #SPAN_64:before*/
+
+#P_5, #P_19, #P_31, #P_43, #P_60 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 50px;
+    overflow-wrap: break-word;
+    width: 858px;
+    word-wrap: break-word;
+    perspective-origin: 429px 25px;
+    transform-origin: 429px 25px;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    margin: 0px 0px 16px;
+    outline: rgb(51, 51, 51) none 0px;
+}/*#P_5, #P_19, #P_31, #P_43, #P_60*/
+
+#H2_6, #H2_52, #H2_57, #H2_62 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 43.390625px;
+    overflow-wrap: break-word;
+    position: relative;
+    width: 858px;
+    word-wrap: break-word;
+    perspective-origin: 429px 21.6875px;
+    transform-origin: 429px 21.6875px;
+    border-top: 0px none rgb(51, 51, 51);
+    border-right: 0px none rgb(51, 51, 51);
+    border-bottom: 1px solid rgb(238, 238, 238);
+    border-left: 0px none rgb(51, 51, 51);
+    font: normal normal bold normal 28px/34.2999992370606px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    margin: 28px 0px 16px;
+    outline: rgb(51, 51, 51) none 0px;
+    padding: 0px 0px 8.39999961853027px;
+}/*#H2_6, #H2_52, #H2_57, #H2_62*/
+
+#A_7, #A_53, #A_58, #A_63 {
+    box-sizing: border-box;
+    color: rgb(64, 120, 192);
+    display: block;
+    height: 0px;
+    left: 0px;
+    overflow-wrap: break-word;
+    position: absolute;
+    text-decoration: none;
+    top: 0px;
+    width: 36px;
+    word-wrap: break-word;
+    align-self: stretch;
+    perspective-origin: 18px 0px;
+    transform-origin: 18px 0px;
+    border: 0px none rgb(64, 120, 192);
+    font: normal normal bold normal 28px/28px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    margin: 0px 0px 0px -30px;
+    outline: rgb(64, 120, 192) none 0px;
+    padding: 0px 6px 0px 30px;
+}/*#A_7, #A_53, #A_58, #A_63*/
+
+#P_9, #P_13, #P_20, #P_25, #P_32, #P_37, #P_44, #P_49, #P_55, #P_65 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 25px;
+    overflow-wrap: break-word;
+    width: 858px;
+    word-wrap: break-word;
+    perspective-origin: 429px 12.5px;
+    transform-origin: 429px 12.5px;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    margin: 0px 0px 16px;
+    outline: rgb(51, 51, 51) none 0px;
+}/*#P_9, #P_13, #P_20, #P_25, #P_32, #P_37, #P_44, #P_49, #P_55, #P_65*/
+
+#H3_10, #H3_16, #H3_22, #H3_28, #H3_34, #H3_40, #H3_46 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 34px;
+    overflow-wrap: break-word;
+    position: relative;
+    width: 858px;
+    word-wrap: break-word;
+    perspective-origin: 429px 17px;
+    transform-origin: 429px 17px;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal bold normal 24px/34.3199996948242px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    margin: 24px 0px 16px;
+    outline: rgb(51, 51, 51) none 0px;
+}/*#H3_10, #H3_16, #H3_22, #H3_28, #H3_34, #H3_40, #H3_46*/
+
+#A_11, #A_17, #A_23, #A_29, #A_35, #A_41, #A_47 {
+    box-sizing: border-box;
+    color: rgb(64, 120, 192);
+    display: block;
+    height: 0px;
+    left: 0px;
+    overflow-wrap: break-word;
+    position: absolute;
+    text-decoration: none;
+    top: 0px;
+    width: 36px;
+    word-wrap: break-word;
+    align-self: stretch;
+    perspective-origin: 18px 0px;
+    transform-origin: 18px 0px;
+    border: 0px none rgb(64, 120, 192);
+    font: normal normal bold normal 24px/28.7999992370605px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    margin: 0px 0px 0px -30px;
+    outline: rgb(64, 120, 192) none 0px;
+    padding: 0px 6px 0px 30px;
+}/*#A_11, #A_17, #A_23, #A_29, #A_35, #A_41, #A_47*/
+
+#P_14, #P_26, #P_38, #P_50 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 25px;
+    overflow-wrap: break-word;
+    width: 858px;
+    word-wrap: break-word;
+    perspective-origin: 429px 12.5px;
+    transform-origin: 429px 12.5px;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    margin: 0px 0px 16px;
+    outline: rgb(51, 51, 51) none 0px;
+}/*#P_14, #P_26, #P_38, #P_50*/
+
+#A_15, #A_21, #A_33, #A_45, #A_56 {
+    box-sizing: border-box;
+    color: rgb(64, 120, 192);
+    overflow-wrap: break-word;
+    text-decoration: none;
+    word-wrap: break-word;
+    border: 0px none rgb(64, 120, 192);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    outline: rgb(64, 120, 192) none 0px;
+}/*#A_15, #A_21, #A_33, #A_45, #A_56*/
+
+#A_27, #A_39, #A_61 {
+    box-sizing: border-box;
+    color: rgb(64, 120, 192);
+    overflow-wrap: break-word;
+    text-decoration: none;
+    word-wrap: break-word;
+    border: 0px none rgb(64, 120, 192);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    outline: rgb(64, 120, 192) none 0px;
+}/*#A_27, #A_39, #A_61*/
+
+#A_51 {
+    box-sizing: border-box;
+    color: rgb(64, 120, 192);
+    overflow-wrap: break-word;
+    text-decoration: none;
+    word-wrap: break-word;
+    border: 0px none rgb(64, 120, 192);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    outline: rgb(64, 120, 192) none 0px;
+}/*#A_51*/
+
+#UL_66 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 325px;
+    overflow-wrap: break-word;
+    width: 858px;
+    word-wrap: break-word;
+    perspective-origin: 429px 162.5px;
+    transform-origin: 429px 162.5px;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    margin: 0px;
+    outline: rgb(51, 51, 51) none 0px;
+    padding: 0px 0px 0px 32px;
+}/*#UL_66*/
+
+#LI_67, #LI_72 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 25px;
+    overflow-wrap: break-word;
+    width: 826px;
+    word-wrap: break-word;
+    perspective-origin: 413px 12.5px;
+    transform-origin: 413px 12.5px;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    outline: rgb(51, 51, 51) none 0px;
+}/*#LI_67, #LI_72*/
+
+#LI_68, #LI_71, #LI_74 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 50px;
+    overflow-wrap: break-word;
+    width: 826px;
+    word-wrap: break-word;
+    perspective-origin: 413px 25px;
+    transform-origin: 413px 25px;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    outline: rgb(51, 51, 51) none 0px;
+}/*#LI_68, #LI_71, #LI_74*/
+
+#UL_69 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 25px;
+    overflow-wrap: break-word;
+    text-align: left;
+    width: 826px;
+    word-wrap: break-word;
+    perspective-origin: 413px 12.5px;
+    transform-origin: 413px 12.5px;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    list-style: circle outside none;
+    margin: 0px;
+    outline: rgb(51, 51, 51) none 0px;
+    padding: 0px 0px 0px 32px;
+}/*#UL_69*/
+
+#LI_70, #LI_77, #LI_79 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 25px;
+    overflow-wrap: break-word;
+    width: 794px;
+    word-wrap: break-word;
+    perspective-origin: 397px 12.5px;
+    transform-origin: 397px 12.5px;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    list-style: circle outside none;
+    outline: rgb(51, 51, 51) none 0px;
+}/*#LI_70, #LI_77, #LI_79*/
+
+#LI_73 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 25px;
+    overflow-wrap: break-word;
+    width: 826px;
+    word-wrap: break-word;
+    perspective-origin: 413px 12.5px;
+    transform-origin: 413px 12.5px;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    outline: rgb(51, 51, 51) none 0px;
+}/*#LI_73*/
+
+#LI_75 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 100px;
+    overflow-wrap: break-word;
+    width: 826px;
+    word-wrap: break-word;
+    perspective-origin: 413px 50px;
+    transform-origin: 413px 50px;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    outline: rgb(51, 51, 51) none 0px;
+}/*#LI_75*/
+
+#UL_76 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 75px;
+    overflow-wrap: break-word;
+    text-align: left;
+    width: 826px;
+    word-wrap: break-word;
+    perspective-origin: 413px 37.5px;
+    transform-origin: 413px 37.5px;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    list-style: circle outside none;
+    margin: 0px;
+    outline: rgb(51, 51, 51) none 0px;
+    padding: 0px 0px 0px 32px;
+}/*#UL_76*/
+
+#LI_78 {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    height: 25px;
+    overflow-wrap: break-word;
+    width: 794px;
+    word-wrap: break-word;
+    perspective-origin: 397px 12.5px;
+    transform-origin: 397px 12.5px;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal normal normal 16px/25.6000003814697px 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+    list-style: circle outside none;
+    outline: rgb(51, 51, 51) none 0px;
+}/*#LI_78*/
+

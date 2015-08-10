@@ -1,0 +1,6 @@
+D:\Office-IT-Pro-Deployment-Scripts\bin\OfficeITProDeploymentScriptsWebSite.dll.config
+D:\Office-IT-Pro-Deployment-Scripts\bin\OfficeITProDeploymentScriptsWebSite.dll
+D:\Office-IT-Pro-Deployment-Scripts\bin\OfficeITProDeploymentScriptsWebSite.pdb
+D:\Office-IT-Pro-Deployment-Scripts\obj\Debug\OfficeITProDeploymentScriptsWebSite.csprojResolveAssemblyReference.cache
+D:\Office-IT-Pro-Deployment-Scripts\obj\Debug\OfficeITProDeploymentScriptsWebSite.dll
+D:\Office-IT-Pro-Deployment-Scripts\obj\Debug\OfficeITProDeploymentScriptsWebSite.pdb
