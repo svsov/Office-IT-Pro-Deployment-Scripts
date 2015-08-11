@@ -10,16 +10,46 @@
       
       <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
       <style>
-        .navbar-static-top {
-            margin-bottom: 20px;
-            background-color: #dc3c00;
-        }
+          .navbar-static-top {
+              margin-bottom: 20px;
+              background-color: #dc3c00;
+          }
 
-        .project-tagline {
-            color: white;
-        }
+          .navbar-static-top button {
+              background-color: #dc3c00;
+              border-color: white;
+           
+          }
+
+          .navbar-static-top button:hover {
+              background-color: #dc3c00;
+              border-color: white;
+          }
+
+          .navbar-static-top button:visited {
+              background-color: #dc3c00;
+              border-color: white;
+          }
+
+          .navbar-static-top button:focus {
+              background-color: #dc3c00;
+              border-color: white;
+          }
+
+          .project-tagline {
+              color: white;
+          }
+
+          .infoButton {
+
+              color: #787878;
+          }
+
+
 
       </style>
+      <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script type="text/javascript" src="./Scripts/indexmain.js"></script>
   </head>
     <body>
         
@@ -30,21 +60,17 @@
                     <table cellspacing="0" cellpadding="0">
                         <tr>
                             <td style="padding-left: 10px">
-                                <a class="navbar-brand" href="#" style="color:white; font-family:segoe ui">Office Deployment Scripts for IT Pros</a>
+                                <a class="navbar-brand" href="#" style="color:white; font-family:segoe ui;width: 500px">Office Deployment Scripts for IT Pros</a>
                             </td>
                             <td style="display: none">
                                 <h2 class="project-tagline">Making Office 2016 and Office 365 ProPlus as simple as CLI </h2>
                             </td>
                             <td>
-                                <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts" class="btn">View on GitHub</a>
+                                <button id="btDownloadZip" class="btn btn-default btn-primary">Download .zip</button>
                             </td>
-                            <td>
-                                <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/zipball/master" class="btn">Download .zip</a>
+                            <td style="text-align: right;padding-left: 20px">
+                                <button id="btViewOnGitHub" class="btn btn-default btn-primary">View On GitHub</button>
                             </td>
-                            <td>
-                                <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/tarball/master" class="btn">Download .tar.gz</a>
-                            </td>
-
                         </tr>
                     </table>
 
