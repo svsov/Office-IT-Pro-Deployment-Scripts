@@ -5,139 +5,145 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/readme.css" media="screen">
 </head>
 <body>
-    <article id="ARTICLE_1">
-        <h1 id="H1_2">
-            <a id="A_3" href="#office-it-pro-deployment-scripts"><span id="SPAN_4"></span></a>Office IT Pro Deployment Scripts
-        </h1>
-        <p id="P_5">
-            This repo is a collection of useful PowerShell scripts to make deploying Office 2016 and Office 365 ProPlus easier for IT Pros and administrators.
-        </p>
-        <h2 id="H2_6">
-            <a id="A_7" href="#scripts"><span id="SPAN_8"></span></a>Scripts
-        </h2>
-        <p id="P_9">
-            For more detailed documentation of each script, check the readme file in the corresponding folder
-        </p>
-        <h3 id="H3_10">
-            <a id="A_11" href="#edit-officeconfigurationfile"><span id="SPAN_12"></span></a>Edit-OfficeConfigurationFile
-        </h3>
-        <p id="P_13">
-            Script to modify the Configuration.xml file to configure installation options for Click-to-Run for Office 365 products.
-        </p>
-        <p id="P_14">
-            <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Edit-OfficeConfigurationFile/README_Edit-OfficeConfigurationFile.md" id="A_15">README</a>
-        </p>
-        <h3 id="H3_16">
-            <a id="A_17" href="#setup-sccmofficeupdates"><span id="SPAN_18"></span></a>Setup-SCCMOfficeUpdates
-        </h3>
-        <p id="P_19">
-            Configures System Center Configuration Manager (SCCM) to configure Office Click-To-Run clients to use their closest Distribution Point (DP) for Office Updates.
-        </p>
-        <p id="P_20">
-            <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Setup-SCCMOfficeUpdates/README_Setup-SCCMOfficeUpdates.md" id="A_21">README</a>
-        </p>
-        <h3 id="H3_22">
-            <a id="A_23" href="#get-officeversion"><span id="SPAN_24"></span></a>Get-OfficeVersion
-        </h3>
-        <p id="P_25">
-            Query a local or remote workstations to find the version of Office that is installed.
-        </p>
-        <p id="P_26">
-            <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Get-OfficeVersion/README_Get-OfficeVersion.md" id="A_27">README</a>
-        </p>
-        <h3 id="H3_28">
-            <a id="A_29" href="#copy-officegposettings"><span id="SPAN_30"></span></a>Copy-OfficeGPOSettings
-        </h3>
-        <p id="P_31">
-            Automate the process of moving from an existing version of Office to a newer version while retaining the current set of group policies.
-        </p>
-        <p id="P_32">
-            <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Copy-OfficeGPOSettings/README_Copy-OfficeGPOSettings.md" id="A_33">README</a>
-        </p>
-        <h3 id="H3_34">
-            <a id="A_35" href="#get-officemodernapps"><span id="SPAN_36"></span></a>Get-OfficeModernApps
-        </h3>
-        <p id="P_37">
-            Remotely verify the modern apps installed on client machines across a domain.
-        </p>
-        <p id="P_38">
-            <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Get-ModernOfficeApps/README_Get-ModernOfficeApps.md" id="A_39">README</a>
-        </p>
-        <h3 id="H3_40">
-            <a id="A_41" href="#configure-gpoofficeinstallation"><span id="SPAN_42"></span></a>Configure-GPOOfficeInstallation
-        </h3>
-        <p id="P_43">
-            This script will configure an existing Active Directory Group Policy to silently install Office 2013 Click-To-Run on computer startup.
-        </p>
-        <p id="P_44">
-            <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Configure-GPOOfficeInstallation/README_New-GPOOfficeInstallation.md" id="A_45">README</a>
-        </p>
-        <h3 id="H3_46">
-            <a id="A_47" href="#get-newofficeusers"><span id="SPAN_48"></span></a>Get-NewOfficeUsers
-        </h3>
-        <p id="P_49">
-            Two functions to identify licensed Office 365 users and track the dates they were enabled or disabled.
-        </p>
-        <p id="P_50">
-            <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Get-NewOfficeUsers/README_Get-NewOfficeUsers.md" id="A_51">README</a>
-        </p>
-        <h2 id="H2_52">
-            <a id="A_53" href="#new-to-powershell-and-office-365"><span id="SPAN_54"></span></a>New to PowerShell and Office 365?
-        </h2>
-        <p id="P_55">
-            Check out <a href="https://poweshell.office.com" id="A_56">PowerShell for Office 365</a> for advice on getting started, key scenarios and script samples.
-        </p>
-        <h2 id="H2_57">
-            <a id="A_58" href="#questions-and-comments"><span id="SPAN_59"></span></a>Questions and comments
-        </h2>
-        <p id="P_60">
-            If you have any trouble running this sample, please log an issue. For more general feedback, send an email to <a href="mailto:o16scripts@microsoft.com" id="A_61">o16scripts@microsoft.com</a>.
-        </p>
-        <h2 id="H2_62">
-            <a id="A_63" href="#how-to-contribute-to-this-project"><span id="SPAN_64"></span></a>How to Contribute to this project
-        </h2>
-        <p id="P_65">
-            This is high level plan for contributing and the structure that we have in place for pulling changes.
-        </p>
-        <ul id="UL_66">
-            <li id="LI_67">
-                There will be 3 main levels of branches: 1 master branch, 1 development branch, feature and bug branches
-            </li>
-            <li id="LI_68">
-                Each powershell script will have its own branch and changes will be made at that level
-                <ul id="UL_69">
-                    <li id="LI_70">
-                        The 3rd level naming conventions will be as follows - Feature-FeatureName or Bug-BugName
+    <div id="DIV_1">
+        <div id="DIV_2">
+        </div>
+        <div id="DIV_24">
+            <article id="ARTICLE_25">
+                <h1 id="H1_26">
+                    <a id="A_27" href="#office-it-pro-deployment-scripts"><span id="SPAN_28"></span></a>Office IT Pro Deployment Scripts
+                </h1>
+                <p id="P_29">
+                    This repo is a collection of useful PowerShell scripts to make deploying Office 2016 and Office 365 ProPlus easier for IT Pros and administrators.
+                </p>
+                <h2 id="H2_30">
+                    <a id="A_31" href="#scripts"><span id="SPAN_32"></span></a>Scripts
+                </h2>
+                <p id="P_33">
+                    For more detailed documentation of each script, check the readme file in the corresponding folder
+                </p>
+                <h3 id="H3_34">
+                    <a id="A_35" href="#edit-officeconfigurationfile"><span id="SPAN_36"></span></a>Edit-OfficeConfigurationFile
+                </h3>
+                <p id="P_37">
+                    Script to modify the Configuration.xml file to configure installation options for Click-to-Run for Office 365 products.
+                </p>
+                <p id="P_38">
+                    <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Edit-OfficeConfigurationFile/README_Edit-OfficeConfigurationFile.md" id="A_39">README</a>
+                </p>
+                <h3 id="H3_40">
+                    <a id="A_41" href="#setup-sccmofficeupdates"><span id="SPAN_42"></span></a>Setup-SCCMOfficeUpdates
+                </h3>
+                <p id="P_43">
+                    Configures System Center Configuration Manager (SCCM) to configure Office Click-To-Run clients to use their closest Distribution Point (DP) for Office Updates.
+                </p>
+                <p id="P_44">
+                    <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Setup-SCCMOfficeUpdates/README_Setup-SCCMOfficeUpdates.md" id="A_45">README</a>
+                </p>
+                <h3 id="H3_46">
+                    <a id="A_47" href="#get-officeversion"><span id="SPAN_48"></span></a>Get-OfficeVersion
+                </h3>
+                <p id="P_49">
+                    Query a local or remote workstations to find the version of Office that is installed.
+                </p>
+                <p id="P_50">
+                    <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Get-OfficeVersion/README_Get-OfficeVersion.md" id="A_51">README</a>
+                </p>
+                <h3 id="H3_52">
+                    <a id="A_53" href="#copy-officegposettings"><span id="SPAN_54"></span></a>Copy-OfficeGPOSettings
+                </h3>
+                <p id="P_55">
+                    Automate the process of moving from an existing version of Office to a newer version while retaining the current set of group policies.
+                </p>
+                <p id="P_56">
+                    <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Copy-OfficeGPOSettings/README_Copy-OfficeGPOSettings.md" id="A_57">README</a>
+                </p>
+                <h3 id="H3_58">
+                    <a id="A_59" href="#get-officemodernapps"><span id="SPAN_60"></span></a>Get-OfficeModernApps
+                </h3>
+                <p id="P_61">
+                    Remotely verify the modern apps installed on client machines across a domain.
+                </p>
+                <p id="P_62">
+                    <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Get-ModernOfficeApps/README_Get-ModernOfficeApps.md" id="A_63">README</a>
+                </p>
+                <h3 id="H3_64">
+                    <a id="A_65" href="#configure-gpoofficeinstallation"><span id="SPAN_66"></span></a>Configure-GPOOfficeInstallation
+                </h3>
+                <p id="P_67">
+                    This script will configure an existing Active Directory Group Policy to silently install Office 2013 Click-To-Run on computer startup.
+                </p>
+                <p id="P_68">
+                    <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Configure-GPOOfficeInstallation/README_New-GPOOfficeInstallation.md" id="A_69">README</a>
+                </p>
+                <h3 id="H3_70">
+                    <a id="A_71" href="#get-newofficeusers"><span id="SPAN_72"></span></a>Get-NewOfficeUsers
+                </h3>
+                <p id="P_73">
+                    Two functions to identify licensed Office 365 users and track the dates they were enabled or disabled.
+                </p>
+                <p id="P_74">
+                    <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Get-NewOfficeUsers/README_Get-NewOfficeUsers.md" id="A_75">README</a>
+                </p>
+                <h2 id="H2_76">
+                    <a id="A_77" href="#new-to-powershell-and-office-365"><span id="SPAN_78"></span></a>New to PowerShell and Office 365?
+                </h2>
+                <p id="P_79">
+                    Check out <a href="https://poweshell.office.com" id="A_80">PowerShell for Office 365</a> for advice on getting started, key scenarios and script samples.
+                </p>
+                <h2 id="H2_81">
+                    <a id="A_82" href="#questions-and-comments"><span id="SPAN_83"></span></a>Questions and comments
+                </h2>
+                <p id="P_84">
+                    If you have any trouble running this sample, please log an issue. For more general feedback, send an email to <a href="mailto:o16scripts@microsoft.com" id="A_85">o16scripts@microsoft.com</a>.
+                </p>
+                <h2 id="H2_86">
+                    <a id="A_87" href="#how-to-contribute-to-this-project"><span id="SPAN_88"></span></a>How to Contribute to this project
+                </h2>
+                <p id="P_89">
+                    This is high level plan for contributing and the structure that we have in place for pulling changes.
+                </p>
+                <ul id="UL_90">
+                    <li id="LI_91">
+                        There will be 3 main levels of branches: 1 master branch, 1 development branch, feature and bug branches
+                    </li>
+                    <li id="LI_92">
+                        Each powershell script will have its own branch and changes will be made at that level
+                        <ul id="UL_93">
+                            <li id="LI_94">
+                                The 3rd level naming conventions will be as follows - Feature-FeatureName or Bug-BugName
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="LI_95">
+                        Pull requests will be made from the feature branches into the development branch and a code review will be completed in the development branch
+                    </li>
+                    <li id="LI_96">
+                        Pull requests should only be made from the feature branch after the script is tested and useable
+                    </li>
+                    <li id="LI_97">
+                        After the code review is complete a pull request will be made from the development branch into the master branch
+                    </li>
+                    <li id="LI_98">
+                        Changes to scripts (new functionality or bug fix) should be done at the thrid level (feature branches) by cloning the development branch using the naming conventions above
+                    </li>
+                    <li id="LI_99">
+                        Requests for changes to scripts can be made by submitting an issue and using the appropriate tag
+                        <ul id="UL_100">
+                            <li id="LI_101">
+                                For additional features to an existing script, use the label "enhancement"
+                            </li>
+                            <li id="LI_102">
+                                For bugs, use the label "bug"
+                            </li>
+                            <li id="LI_103">
+                                All issues will be reviewed and prioritized each day as we work to add new scripts and improve existing ones
+                            </li>
+                        </ul>
                     </li>
                 </ul>
-            </li>
-            <li id="LI_71">
-                Pull requests will be made from the feature branches into the development branch and a code review will be completed in the development branch
-            </li>
-            <li id="LI_72">
-                Pull requests should only be made from the feature branch after the script is tested and useable
-            </li>
-            <li id="LI_73">
-                After the code review is complete a pull request will be made from the development branch into the master branch
-            </li>
-            <li id="LI_74">
-                Changes to scripts (new functionality or bug fix) should be done at the thrid level (feature branches) by cloning the development branch using the naming conventions above
-            </li>
-            <li id="LI_75">
-                Requests for changes to scripts can be made by submitting an issue and using the appropriate tag
-                <ul id="UL_76">
-                    <li id="LI_77">
-                        For additional features to an existing script, use the label "enhancement"
-                    </li>
-                    <li id="LI_78">
-                        For bugs, use the label "bug"
-                    </li>
-                    <li id="LI_79">
-                        All issues will be reviewed and prioritized each day as we work to add new scripts and improve existing ones
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </article>
+            </article>
+        </div>
+    </div>
 </body>
 </html>

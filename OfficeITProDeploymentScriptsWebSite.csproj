@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="images\GitHubScreen.png" />
     <Content Include="images\info.png" />
     <Content Include="images\Office.png" />
     <Content Include="index.html" />

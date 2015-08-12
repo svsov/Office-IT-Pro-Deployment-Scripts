@@ -11,4 +11,16 @@
         return false;
     });
 
+
+    resizeWindow();
 });
+
+function resizeWindow() {
+    var bodyHeight = window.innerHeight;
+    var bodyWidth = window.innerWidth;
+    var leftPaneHeight = bodyHeight - 180;
+
+    var iframeHeight = bodyHeight - 80;
+    $("#mainFrame").height(iframeHeight);
+
+}

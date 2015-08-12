@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-      <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-      
-      <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">  
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+
       <style>
           .navbar-static-top {
-              margin-bottom: 20px;
               background-color: #dc3c00;
           }
 
@@ -41,11 +40,17 @@
           }
 
           .infoButton {
-
               color: #787878;
           }
 
+          #gitHubHover img {
+            opacity:0.8;
+          }
 
+          #gitHubHover img:hover{
+            opacity:1.0;
+            border: 1px solid black;
+          }
 
       </style>
       <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -59,7 +64,7 @@
 
                     <table cellspacing="0" cellpadding="0">
                         <tr>
-                            <td style="padding-left: 10px">
+                            <td style="padding-left: 10px;width: 100%">
                                 <a class="navbar-brand" href="#" style="color:white; font-family:segoe ui;width: 500px">Office Deployment Scripts for IT Pros</a>
                             </td>
                             <td style="display: none">
@@ -68,7 +73,7 @@
                             <td>
                                 <button id="btDownloadZip" class="btn btn-default btn-primary">Download .zip</button>
                             </td>
-                            <td style="text-align: right;padding-left: 20px">
+                            <td style="text-align: right;padding-left: 20px;">
                                 <button id="btViewOnGitHub" class="btn btn-default btn-primary">View On GitHub</button>
                             </td>
                         </tr>
@@ -77,21 +82,13 @@
                 </div>
             </div>
         </div>
-
-        <div style="width: 100%;text-align: center">
-            <iframe src="./readme.html" width="100%" height="600px" frameborder="0"></iframe>
-        </div>
         
-        <section class="main-content">
-           
-
-
-            <footer class="site-footer">
-                <span class="site-footer-owner"><a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts">Office Deployment Scripts for IT Pros</a> is maintained by <a href="https://github.com/OfficeDev">OfficeDev</a>.</span>
-            </footer>
-
-        </section>
-
+        <div style="height: 40px;">
+            
+        </div>
+        <div id="gitHubHover" style="width: 800px;height: 600px ;text-align: center">
+            <img id="gitHubImg" src="./images/GitHubScreen.png" alt="" width="400" height="300" style="border-style:solid;border-width: 1px;border-color: yellow;" />
+        </div>
   
     </body>
 </html>
