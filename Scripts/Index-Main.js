@@ -17,6 +17,11 @@
         return false;
     });
 
+    $("#xmlEditorLabel").click(function() {
+        window.open("./XmlEditor.html");
+        return false;
+    });
+
     $(window).resize(function () {
         resizeWindow();
     });
