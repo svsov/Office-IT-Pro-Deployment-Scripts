@@ -4,34 +4,38 @@
     <meta charset="UTF-8">
     <title>Office Deployment Scripts for IT Pros by OfficeDev</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">  
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheets/Index-Main.css" rel="stylesheet">  
 
       <style>
-          .navbar-static-top {
-              background-color: #dc3c00;
-          }
+          
+           .navbar-static-top {
+               /*background-color: #dc3c00;*/
+               background-image: linear-gradient(120deg, #f56c39, #dc3c00);
+               height: 180px;
+               min-height: 180px;
+           }
 
           .navbar-static-top button {
-              background-color: #dc3c00;
+              background-color: #f85d23;
               border-color: white;
-           
           }
 
           .navbar-static-top button:hover {
-              background-color: #dc3c00;
+              background-color: #f56c39;
               border-color: white;
+              text-decoration: none;
+              background-color: rgba(255, 255, 255, 0.2);
+              border-color: rgba(255, 255, 255, 0.3);
           }
 
           .navbar-static-top button:visited {
-              background-color: #dc3c00;
+              background-color: #f56c39;
               border-color: white;
           }
 
           .navbar-static-top button:focus {
-              background-color: #dc3c00;
+              background-color: #f56c39;
               border-color: white;
           }
 
@@ -43,38 +47,70 @@
               color: #787878;
           }
 
-          #gitHubHover img {
-            opacity:0.8;
+          .mainText {
+
+              font-size: 1.2em;
           }
 
-          #gitHubHover img:hover{
-            opacity:1.0;
-            border: 1px solid black;
+          .centered {  
+              z-index: 100;
+              position: absolute; 
+              top:10%;  
+              left:10%;  
+          }  
+
+          #bodyDiv {
+              position: relative;
+          }
+
+          .project-tagline {
+              font-weight: normal;
+              opacity: 0.7;
+              font-size: 1.2em;
+              position: relative;
+              top: -15px;
+          }
+
+          .project-name {
+              font-size: 3.25em;
+              font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          }
+
+          .readme {
+             
           }
 
       </style>
       <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-      <script type="text/javascript" src="./Scripts/indexmain.js"></script>
+      <script type="text/javascript" src="./Scripts/Index-Main.js"></script>
   </head>
     <body>
         
-        <div id="top-nav" class="navbar navbar-inverse navbar-static-top" style="min-width: 550px">
+        
+        <div id="top-nav" class="navbar navbar-inverse navbar-static-top" style="min-width: 1200px;">
             <div class="container-fluid">
-                <div class="navbar-header">
+                <div class="navbar-header" style="width:100%;">
 
-                    <table cellspacing="0" cellpadding="0">
+                    <table cellspacing="0" cellpadding="0" style="width: 100%;">
                         <tr>
-                            <td style="padding-left: 10px;width: 100%">
-                                <a class="navbar-brand" href="#" style="color:white; font-family:segoe ui;width: 500px">Office Deployment Scripts for IT Pros</a>
+                            <td style="width: 100%;text-align: center;min-width: 800px;">
+                                <h1 class="project-name" style="color:white;">Office Deployment Scripts for IT Pros</h1>
                             </td>
-                            <td style="display: none">
+                        </tr> 
+                        <tr>
+                            <td style="text-align: center;">
                                 <h2 class="project-tagline">Making Office 2016 and Office 365 ProPlus as simple as CLI </h2>
                             </td>
-                            <td>
-                                <button id="btDownloadZip" class="btn btn-default btn-primary">Download .zip</button>
-                            </td>
-                            <td style="text-align: right;padding-left: 20px;">
-                                <button id="btViewOnGitHub" class="btn btn-default btn-primary">View On GitHub</button>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <button id="btViewOnGitHub" class="btn btn-default btn-primary">
+                                    View On GitHub
+                                    
+                                </button>
+                                <button id="btDownloadZip" class="btn btn-default btn-primary">
+                                    Download .zip
+                                </button>
                             </td>
                         </tr>
                     </table>
@@ -83,13 +119,44 @@
             </div>
         </div>
         
-        <div style="height: 40px;">
+        <div id="bodyDiv" style="width: 1400px; position: relative;min-width: 1200px;">
+        
+            <div id="textDiv" style="width:700px;padding-left: 20px;float:left;">
+                <div class="page-header">
+                    <h2>GitHub Script Repository</h2>
+                </div>
+                <p style="font-size: 1.2em">
+                    In an effort to streamline the deployment process for Office 2016 and Office 365 ProPlus, 
+                    a GitHub <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts">respository</a> has been created with a collection of scripts and other projects. 
+                    The <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts">respository</a> is meant to be a place for IT Pros to come and find solutions that will 
+                    make tasks related to deploying and maintaining Office easier.
+                </p>
+                <p style="font-size: 1.2em">
+                    All items in the master branch of the <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts">respository</a> are tested and ready to use.  Each script
+                    has a <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/README.md">ReadMe</a> 
+                    file that explains how to use it. The main <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/README.md">ReadMe</a>  
+                    has a list of the name and descriptions for all of the scripts in the <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts">respository</a>.
+                </p>
+                <p style="font-size: 1.2em">
+                    If you would like to contribute to <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts">respository</a> please following the instructions <br/> <i>'How to Contribute to this project'</i> in the main  
+                    <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/README.md">ReadMe</a> file in the <a href="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts">respository</a>.
+                </p>
+                <a id="paddingLabel">
+                   
+                </a>
+            </div>
             
+            <div id="imgDiv" style="width:700px;text-align:center;float:right;">
+                <div class="col-md-11">
+                    <a href="#" class="thumbnail" style="text-decoration: none;">
+                        <img id="gitHubImg" src="./images/GitHubScreen.png" alt="" width="700" style="border-width: 1px;" />
+                        <hr />
+                        <p class="thumbNailLabel">Office IT Pro Deployment Scripts Readme in GitHub</p>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div id="gitHubHover" style="width: 800px;height: 600px ;text-align: center">
-            <img id="gitHubImg" src="./images/GitHubScreen.png" alt="" width="400" height="300" style="border-style:solid;border-width: 1px;border-color: yellow;" />
-        </div>
-  
+
     </body>
 </html>
 
