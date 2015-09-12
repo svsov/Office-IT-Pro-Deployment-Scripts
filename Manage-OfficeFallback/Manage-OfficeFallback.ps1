@@ -53,9 +53,6 @@ param(
     [Parameter(ValueFromPipelineByPropertyName=$true)]
     [string] $TargetFilePath = $NULL,
 
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
-    [OfficeCTRVersion] $OfficeVersion = "Office2013",
-
     [Parameter()]
     [bool] $WaitForInstallToFinish = $true
 )
@@ -346,7 +343,20 @@ Param(
 
             if($messageUI -match "Y"){
                 write-host "Please wait while $c2rName is being uninstalled..."
-                Invoke-Expression $command                
+                Invoke-Expression $command
+                $c2rTest = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True"}
+                if($c2rTest -eq $NULL){
+                    Write-Host "Office Click-to-Run has been successfully uninstalled."
+                }
+                else{
+                    $testUI = Read-Host "There was a problem uninstalling Office Click-to-Run. Would you like to try again?"
+                    if($testUI -match "Y"){
+                        Invoke-Expression $command
+                    }
+                    else{
+                        Break
+                    }
+                }                       
             }
             else{
                 Break
