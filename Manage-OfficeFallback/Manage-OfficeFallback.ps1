@@ -1,9 +1,9 @@
-[CmdletBinding(SupportsShouldProcess=$true)]
-param(
-    [string[]]$ComputerName = $env:COMPUTERNAME,
-    [switch]$ShowAllInstalledProducts,
-    [System.Management.Automation.PSCredential]$Credentials
-)
+Add-Type -TypeDefinition @"
+   public enum OfficeCTRVersion
+   {
+      Office2013
+   }
+"@
 
 Function Get-OfficeVersion {
 <#
@@ -42,8 +42,22 @@ Will return the locally installed Office product with all of the available prope
 param(
     [Parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true, Position=0)]
     [string[]]$ComputerName = $env:COMPUTERNAME,
+
     [switch]$ShowAllInstalledProducts,
-    [System.Management.Automation.PSCredential]$Credentials
+
+    [System.Management.Automation.PSCredential]$Credentials,
+
+    [Parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true, Position=0)]
+    [string] $ConfigurationXML = $NULL,
+
+    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [string] $TargetFilePath = $NULL,
+
+    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [OfficeCTRVersion] $OfficeVersion = "Office2013",
+
+    [Parameter()]
+    [bool] $WaitForInstallToFinish = $true
 )
 
 begin {
@@ -300,9 +314,21 @@ Will uninstall Office Click-to-Run.
 
 #>
 
-    Param(
-        [string[]] $ComputerName = $env:COMPUTERNAME
-    )
+Param(
+    [string[]] $ComputerName = $env:COMPUTERNAME,
+
+    [Parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true, Position=0)]
+    [string] $ConfigurationXML = $NULL,
+
+    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [string] $TargetFilePath = $NULL,
+
+    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [OfficeCTRVersion] $OfficeVersion = "Office2013",
+
+    [Parameter()]
+    [bool] $WaitForInstallToFinish = $true
+)
 
     foreach($Computer in $ComputerName){
         $c2rVersions = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True" -and $_.DisplayName -match "Microsoft Office 365"}
