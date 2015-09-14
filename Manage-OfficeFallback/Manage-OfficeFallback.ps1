@@ -1,3 +1,83 @@
+Function Remove-OfficeClickToRun {
+<#
+.Synopsis
+Removes the Click to Run version of Office installed.
+
+.DESCRIPTION
+If Office Click-to-Run is installed the administrator will be prompted to confirm
+uninstallation. A configuration file will be generated and used to remove all Office CTR 
+products.
+
+.PARAMETER ComputerName
+The computer or list of computers from which to query 
+
+.EXAMPLE
+Remove-OfficeClickToRun
+
+Description:
+Will uninstall Office Click-to-Run.
+
+#>
+    [CmdletBinding()]
+    Param(
+        [string[]] $ComputerName = $env:COMPUTERNAME,
+        [string] $RemoveCTRXmlPath = "$env:PUBLIC\Documents\RemoveCTRConfig.xml",
+
+        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [string] $TargetFilePath = $NULL
+
+
+    )
+
+    Begin{
+        New-CTRRemoveXml | Out-File $RemoveCTRXmlPath
+    }
+
+    Process{
+        if (($PSCmdlet.MyInvocation.PipelineLength -eq 1) -or ($PSCmdlet.MyInvocation.PipelineLength -eq $PSCmdlet.MyInvocation.PipelinePosition)) {
+        
+            $c2rVersions = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True" -and $_.DisplayName -match "Microsoft Office 365"}
+            $c2rName = $c2rVersions.DisplayName
+
+            foreach($c2r in $c2rVersions){
+                if($version -match "15"){
+                    $OdtExe = ".\Office2013setup.exe"
+                }
+                else{
+                    $OdtExe = ".\Office2016setup.exe"
+                }        
+    
+                $command = "$OdtExe /configure $RemoveCTRXmlPath"
+                $messageUI = Read-Host "Are you sure you want to uninstall $c2rName on $env:COMPUTERNAME"
+
+                if($messageUI -match "Y"){
+                    write-host "Please wait while $c2rName is being uninstalled..."
+                    Invoke-Expression $command
+                    $c2rTest = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True"}
+                    if($c2rTest -eq $NULL){
+                        Write-Host "Office Click-to-Run has been successfully uninstalled."
+                    }
+                    else{
+                        $testUI = Read-Host "There was a problem uninstalling Office Click-to-Run. Would you like to try again?"
+                        if($testUI -match "Y"){
+                            Invoke-Expression $command
+                        }
+                        else{
+                            Break
+                        }
+                    }                       
+                }
+            }     
+        }
+        else {
+            $results = new-object PSObject[] 0;
+            $Result = New-Object –TypeName PSObject 
+            Add-Member -InputObject $Result -MemberType NoteProperty -Name "TargetFilePath" -Value $TargetFilePath
+            $Result
+        }
+    }
+}
+
 Function Get-OfficeVersion {
 <#
 .Synopsis
@@ -271,78 +351,12 @@ process {
 
 }
 
-Function Remove-OfficeClickToRun {
-<#
-.Synopsis
-Removes the Click to Run version of Office installed.
-
-.DESCRIPTION
-This function will look for all Office products installed and if a Click-to-Run
-version is detected the administrator will be prompted to confirm the uninstall.
-Office C2R will be uninstalled using ODT and a pre-defined xml file. If an MSI is installed
-it remain on the computer and function normally.
-
-.PARAMETER ComputerName
-The computer or list of computers from which to query 
-
-.EXAMPLE
-Remove-OfficeClickToRun
-
-Description:
-Will uninstall Office Click-to-Run.
-
-#>
-    [CmdletBinding()]
-    Param(
-        [string[]] $ComputerName = $env:COMPUTERNAME,
-
-        [Parameter(ValueFromPipelineByPropertyName=$true)]
-        [string] $TargetFilePath = $NULL
-    )
-
-    Process{
-        if (($PSCmdlet.MyInvocation.PipelineLength -eq 1) -or ($PSCmdlet.MyInvocation.PipelineLength -eq $PSCmdlet.MyInvocation.PipelinePosition)) {
-        
-            $c2rVersions = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True" -and $_.DisplayName -match "Microsoft Office 365"}
-            $c2rName = $c2rVersions.DisplayName
-
-            foreach($c2r in $c2rVersions){
-                if($version -match "15"){
-                    $OdtExe = ".\Office2013setup.exe"
-                }
-                else{
-                    $OdtExe = ".\Office2016setup.exe"
-                }        
-    
-                $command = "$OdtExe /configure RemoveConfig.xml"
-                $messageUI = Read-Host "Are you sure you want to uninstall $c2rName on $env:COMPUTERNAME"
-
-                if($messageUI -match "Y"){
-                    write-host "Please wait while $c2rName is being uninstalled..."
-                    Invoke-Expression $command
-                    $c2rTest = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True"}
-                    if($c2rTest -eq $NULL){
-                        Write-Host "Office Click-to-Run has been successfully uninstalled."
-                    }
-                    else{
-                        $testUI = Read-Host "There was a problem uninstalling Office Click-to-Run. Would you like to try again?"
-                        if($testUI -match "Y"){
-                            Invoke-Expression $command
-                        }
-                        else{
-                            Break
-                        }
-                    }                       
-                }
-            }     
-        }
-        else {
-            $results = new-object PSObject[] 0;
-            $Result = New-Object –TypeName PSObject 
-            Add-Member -InputObject $Result -MemberType NoteProperty -Name "TargetFilePath" -Value $TargetFilePath
-            $Result
-        }
-    }
+Function New-CTRRemoveXml {
+@"
+<Configuration>
+  <Remove All="True">
+  </Remove>
+  <Display Level="None" AcceptEULA="TRUE" />
+</Configuration>
+"@
 }
-            
-
