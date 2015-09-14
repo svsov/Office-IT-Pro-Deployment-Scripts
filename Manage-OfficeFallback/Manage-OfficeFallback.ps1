@@ -42,19 +42,8 @@ Will return the locally installed Office product with all of the available prope
 param(
     [Parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true, Position=0)]
     [string[]]$ComputerName = $env:COMPUTERNAME,
-
     [switch]$ShowAllInstalledProducts,
-
-    [System.Management.Automation.PSCredential]$Credentials,
-
-    [Parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true, Position=0)]
-    [string] $ConfigurationXML = $NULL,
-
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
-    [string] $TargetFilePath = $NULL,
-
-    [Parameter()]
-    [bool] $WaitForInstallToFinish = $true
+    [System.Management.Automation.PSCredential]$Credentials
 )
 
 begin {
@@ -313,9 +302,6 @@ Will uninstall Office Click-to-Run.
 
 Param(
     [string[]] $ComputerName = $env:COMPUTERNAME,
-
-    [Parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true, Position=0)]
-    [string] $ConfigurationXML = $NULL,
 
     [Parameter(ValueFromPipelineByPropertyName=$true)]
     [string] $TargetFilePath = $NULL,
