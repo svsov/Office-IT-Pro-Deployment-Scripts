@@ -274,7 +274,7 @@ process {
 Function Remove-OfficeClickToRun {
 <#
 .Synopsis
-Removes the Click to Run version of Office installed
+Removes the Click to Run version of Office installed.
 
 .DESCRIPTION
 This function will look for all Office products installed and if a Click-to-Run
