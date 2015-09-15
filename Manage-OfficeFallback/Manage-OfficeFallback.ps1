@@ -16,7 +16,6 @@ Remove-OfficeClickToRun
 
 Description:
 Will uninstall Office Click-to-Run.
-
 #>
     [CmdletBinding()]
     Param(
@@ -49,16 +48,29 @@ Will uninstall Office Click-to-Run.
     
                 $command = "$OdtExe /configure $RemoveCTRXmlPath"
                 $messageUI = Read-Host "Are you sure you want to uninstall $c2rName on $env:COMPUTERNAME"
+                $c2rTest = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True"}
+                $msiTest = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "False" -and $_.DisplayName -ne $NULL}
 
                 if($messageUI -match "Y"){
                     write-host "Please wait while $c2rName is being uninstalled..."
+
                     Invoke-Expression $command
-                    $c2rTest = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True"}
+                    
                     if($c2rTest -eq $NULL){
-                        Write-Host "Office Click-to-Run has been successfully uninstalled."
+                        if($msiTest){
+                            $word = New-Object -ComObject "Word.application"            
+                            $word.visible = $true            
+                            $doc = $word.Documents.Add()            
+                            $doc.Activate() 
+                            $word.Quit()
+                        }
+                        else{                            
+                            Write-Host "Office Click-to-Run has been successfully uninstalled." 
+                        }                     
                     }
                     else{
                         $testUI = Read-Host "There was a problem uninstalling Office Click-to-Run. Would you like to try again?"
+
                         if($testUI -match "Y"){
                             Invoke-Expression $command
                         }
@@ -70,6 +82,7 @@ Will uninstall Office Click-to-Run.
             }     
         }
         else {
+
             $results = new-object PSObject[] 0;
             $Result = New-Object –TypeName PSObject 
             Add-Member -InputObject $Result -MemberType NoteProperty -Name "TargetFilePath" -Value $TargetFilePath
@@ -352,6 +365,7 @@ process {
 }
 
 Function New-CTRRemoveXml {
+#Create a xml configuration file to remove all Office CTR products.
 @"
 <Configuration>
   <Remove All="True">
