@@ -28,64 +28,51 @@ Will uninstall Office Click-to-Run.
 
         [Parameter(ValueFromPipelineByPropertyName=$true)]
         [string] $TargetFilePath = $NULL
-
-
     )
 
-    Begin{
-
-        newCTRRemoveXml | Out-File $RemoveCTRXmlPath
-    }
-
-    Process{
-            [bool] $isInPipe = $true
-            if (($PSCmdlet.MyInvocation.PipelineLength -eq 1) -or ($PSCmdlet.MyInvocation.PipelineLength -eq $PSCmdlet.MyInvocation.PipelinePosition)) {
-               $isInPipe = $false
-            }
-            
-            $c2rVersions = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True" -and $_.DisplayName -match "Microsoft Office 365"}
-            $c2rName = $c2rVersions.DisplayName
-
-            foreach($c2r in $c2rVersions){
-                if($version -match "15"){
-                    $OdtExe = ".\Office2013setup.exe"
-                }
-                else{
-                    $OdtExe = ".\Office2016setup.exe"
-                }        
     
-                $command = "$OdtExe /configure $RemoveCTRXmlPath"
-                $messageUI = Read-Host "Are you sure you want to uninstall $c2rName on $env:COMPUTERNAME"
-                      
-                $msiTest = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "False" -and $_.DisplayName -ne $NULL}
-
-                if($messageUI -match "Y"){
-                    if (!($isInPipe)) {
-                      write-host "Please wait while $c2rName is being uninstalled..."
-                    }
-
-                    Invoke-Expression $command | Out-Null                                       
-                }
-
-                [bool] $c2rTest = $false 
-                if( Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True"} ){
-                    $c2rTest = $true
-                }
-
-                if(!($c2rTest)){                           
-                    if (!($isInPipe)) {                        
-                        Write-Host "Office Click-to-Run has been successfully uninstalled." 
-                    }
-                }                                         
-            }
+        newCTRRemoveXml | Out-File $RemoveCTRXmlPath
+    
+        [bool] $isInPipe = $true
+        if (($PSCmdlet.MyInvocation.PipelineLength -eq 1) -or ($PSCmdlet.MyInvocation.PipelineLength -eq $PSCmdlet.MyInvocation.PipelinePosition)) {
+            $isInPipe = $false
+        }
             
+        $c2rVersion = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True" -and $_.DisplayName -match "Microsoft Office 365"}
+        $c2rName = $c2rVersion.DisplayName
+             
+        if(!($isInPipe)) {
+            write-host "Please wait while $c2rName is being uninstalled..."
+        }
+        
+        if($c2rVersion -match "15"){
+            $OdtExe = ".\Office2013setup.exe"
+        }
+        else{
+            $OdtExe = ".\Office2016setup.exe"
+        } 
+
+        $command = "$OdtExe /configure $RemoveCTRXmlPath"
+
+        Invoke-Expression $command | Out-Null 
+                        
+        [bool] $c2rTest = $false 
+        if( Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True"} ){
+            $c2rTest = $true
+        }
+
+        if(!($c2rTest)){                           
+            if (!($isInPipe)) {                        
+                Write-Host "Office Click-to-Run has been successfully uninstalled." 
+            }
+        }                                      
+                                                                               
         if ($isInPipe) {
             $results = new-object PSObject[] 0;
             $Result = New-Object –TypeName PSObject 
             Add-Member -InputObject $Result -MemberType NoteProperty -Name "TargetFilePath" -Value $TargetFilePath
             $Result
-        }
-    }
+        } 
 }
 
 Function Get-OfficeVersion {
