@@ -20,7 +20,11 @@ Will uninstall Office Click-to-Run.
     [CmdletBinding()]
     Param(
         [string[]] $ComputerName = $env:COMPUTERNAME,
+
         [string] $RemoveCTRXmlPath = "$env:PUBLIC\Documents\RemoveCTRConfig.xml",
+
+        [Parameter()]
+        [bool] $WaitForInstallToFinish = $true,
 
         [Parameter(ValueFromPipelineByPropertyName=$true)]
         [string] $TargetFilePath = $NULL
@@ -29,12 +33,16 @@ Will uninstall Office Click-to-Run.
     )
 
     Begin{
-        New-CTRRemoveXml | Out-File $RemoveCTRXmlPath
+
+        newCTRRemoveXml | Out-File $RemoveCTRXmlPath
     }
 
     Process{
-        if (($PSCmdlet.MyInvocation.PipelineLength -eq 1) -or ($PSCmdlet.MyInvocation.PipelineLength -eq $PSCmdlet.MyInvocation.PipelinePosition)) {
-        
+            [bool] $isInPipe = $true
+            if (($PSCmdlet.MyInvocation.PipelineLength -eq 1) -or ($PSCmdlet.MyInvocation.PipelineLength -eq $PSCmdlet.MyInvocation.PipelinePosition)) {
+               $isInPipe = $false
+            }
+            
             $c2rVersions = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True" -and $_.DisplayName -match "Microsoft Office 365"}
             $c2rName = $c2rVersions.DisplayName
 
@@ -48,41 +56,30 @@ Will uninstall Office Click-to-Run.
     
                 $command = "$OdtExe /configure $RemoveCTRXmlPath"
                 $messageUI = Read-Host "Are you sure you want to uninstall $c2rName on $env:COMPUTERNAME"
-                $c2rTest = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True"}
+                      
                 $msiTest = Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "False" -and $_.DisplayName -ne $NULL}
 
                 if($messageUI -match "Y"){
-                    write-host "Please wait while $c2rName is being uninstalled..."
-
-                    Invoke-Expression $command
-                    
-                    if($c2rTest -eq $NULL){
-                        if($msiTest){
-                            $word = New-Object -ComObject "Word.application"            
-                            $word.visible = $true            
-                            $doc = $word.Documents.Add()            
-                            $doc.Activate() 
-                            $word.Quit()
-                        }
-                        else{                            
-                            Write-Host "Office Click-to-Run has been successfully uninstalled." 
-                        }                     
+                    if (!($isInPipe)) {
+                      write-host "Please wait while $c2rName is being uninstalled..."
                     }
-                    else{
-                        $testUI = Read-Host "There was a problem uninstalling Office Click-to-Run. Would you like to try again?"
 
-                        if($testUI -match "Y"){
-                            Invoke-Expression $command
-                        }
-                        else{
-                            Break
-                        }
-                    }                       
+                    Invoke-Expression $command | Out-Null                                       
                 }
-            }     
-        }
-        else {
 
+                [bool] $c2rTest = $false 
+                if( Get-OfficeVersion | Where-Object {$_.ClickToRun -eq "True"} ){
+                    $c2rTest = $true
+                }
+
+                if(!($c2rTest)){                           
+                    if (!($isInPipe)) {                        
+                        Write-Host "Office Click-to-Run has been successfully uninstalled." 
+                    }
+                }                                         
+            }
+            
+        if ($isInPipe) {
             $results = new-object PSObject[] 0;
             $Result = New-Object –TypeName PSObject 
             Add-Member -InputObject $Result -MemberType NoteProperty -Name "TargetFilePath" -Value $TargetFilePath
@@ -364,7 +361,7 @@ process {
 
 }
 
-Function New-CTRRemoveXml {
+Function newCTRRemoveXml {
 #Create a xml configuration file to remove all Office CTR products.
 @"
 <Configuration>
@@ -373,4 +370,145 @@ Function New-CTRRemoveXml {
   <Display Level="None" AcceptEULA="TRUE" />
 </Configuration>
 "@
+}
+
+Function Get-OfficeCTRRegPath() {
+    $path15 = 'SOFTWARE\Microsoft\Office\15.0\ClickToRun'
+    $path16 = 'SOFTWARE\Microsoft\Office\ClickToRun'
+
+    if (Test-Path "HKLM:\$path15") {
+      return $path15
+    } else {
+      if (Test-Path "HKLM:\$path16") {
+         return $path16
+      }
+    }
+}
+
+Function Wait-ForOfficeCTRInstall() {
+    [CmdletBinding()]
+    Param(
+        [Parameter()]
+        [int] $TimeOutInMinutes = 120
+    )
+
+    begin {
+        $HKLM = [UInt32] "0x80000002"
+        $HKCR = [UInt32] "0x80000000"
+    }
+
+    process {
+       Write-Host "Waiting for Update to Complete..."
+
+       Start-Sleep -Seconds 5
+
+       $mainRegPath = Get-OfficeCTRRegPath 
+       $scenarioPath = Join-Path $mainRegPath "scenario"
+
+       $regProv = Get-Wmiobject -list "StdRegProv" -namespace root\default -ErrorAction Stop
+
+       [DateTime]$startTime = Get-Date
+
+       [string]$executingScenario = ""
+       $failure = $false
+       $updateRunning=$false
+       [string[]]$trackProgress = @()
+       [string[]]$trackComplete = @()
+       do {
+           $allComplete = $true
+           try {
+              $exScenario = $regProv.GetStringValue($HKLM, $mainRegPath, "ExecutingScenario")
+           } catch { }
+           if ($exScenario) {
+              $executingScenario = $exScenario.sValue
+           }
+
+           $scenarioKeys = $regProv.EnumKey($HKLM, $scenarioPath)
+           foreach ($scenarioKey in $scenarioKeys.sNames) {
+              if (!($executingScenario)) { continue }
+              if ($scenarioKey.ToLower() -eq $executingScenario.ToLower()) {
+                $taskKeyPath = Join-Path $scenarioPath "$scenarioKey\TasksState"
+                $taskValues = $regProv.EnumValues($HKLM, $taskKeyPath).sNames
+
+                foreach ($taskValue in $taskValues) {
+                    [string]$status = $regProv.GetStringValue($HKLM, $taskKeyPath, $taskValue).sValue
+                    $operation = $taskValue.Split(':')[0]
+                    $keyValue = $taskValue
+
+                    if ($status.ToUpper() -eq "TASKSTATE_FAILED") {
+                        $failure = $true
+                    }
+
+                    $displayValue = showTaskStatus -Operation $operation -Status $status -DateTime (Get-Date).ToString('yyyy-MM-dd HH:mm:ss')
+
+                    if (($status.ToUpper() -eq "TASKSTATE_COMPLETED") -or`
+                        ($status.ToUpper() -eq "TASKSTATE_CANCELLED") -or`
+                        ($status.ToUpper() -eq "TASKSTATE_FAILED")) {
+                        if ($trackProgress.Contains($keyValue) -and !$trackComplete.Contains($keyValue)) {
+                            $displayValue
+                            $trackComplete += $keyValue 
+                        }
+                    } else {
+                        $allComplete = $false
+                        $updateRunning=$true
+
+                        if (!$trackProgress.Contains($keyValue)) {
+                            $trackProgress += $keyValue 
+                            $displayValue
+                        }
+                    }
+                }
+              }
+           }
+
+
+           if ($allComplete) {
+              break;
+           }
+
+           if ($startTime -lt (Get-Date).AddHours(-$TimeOutInMinutes)) {
+              throw "Waiting for Update Timed-Out"
+              break;
+           }
+
+           Start-Sleep -Seconds 5
+       } while($true -eq $true) 
+
+       if ($updateRunning) {
+          if ($failure) {
+            Write-Host "Update Failed"
+          } else {
+            Write-Host "Update Complete"
+          }
+       } 
+       else {
+          if(Get-OfficeCTRRegPath -eq $null){
+            Write-host "Office Click-To-Run has been removed"
+          }
+          else{
+            Write-Host "Update Not Running"
+          }
+       } 
+    }
+}
+
+function showTaskStatus() {
+    [CmdletBinding()]
+    Param(
+        [Parameter()]
+        [string] $Operation = "",
+
+        [Parameter()]
+        [string] $Status = "",
+
+        [Parameter()]
+        [string] $DateTime = ""
+    )
+
+    $results = new-object PSObject[] 0;
+    $Result = New-Object –TypeName PSObject 
+    Add-Member -InputObject $Result -MemberType NoteProperty -Name "Operation" -Value $Operation
+    Add-Member -InputObject $Result -MemberType NoteProperty -Name "Status" -Value $Status
+    Add-Member -InputObject $Result -MemberType NoteProperty -Name "DateTime" -Value $DateTime
+    return $Result
 }
