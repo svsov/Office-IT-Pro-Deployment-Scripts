@@ -46,9 +46,6 @@ $gpo.WmiFilter = $filter
 
 Create a WMI filter for 32-bit work station and link it to a new GPO named "Test GPO".
 
-.NOTES
-Domain administrator priviledge is required for executing this cmdlet
-
 #>
    [CmdletBinding()] 
     Param
@@ -186,9 +183,6 @@ Remove-GPWmiFilter -Name 'Virtual Machines'
 
 Remove the WMI filter with name 'Virtual Machines'
 
-.NOTES
-Domain administrator priviledge is required for executing this cmdlet
-
 #>
    [CmdletBinding(DefaultParametersetName="ByGUID")] 
     Param
@@ -244,10 +238,6 @@ Output the updated WMI filter instance with this switch.
 Set-GPWmiFilter -Name 'Workstations' -Expression 'SELECT * FROM Win32_OperatingSystem WHERE ProductType = "1"'
 
 Set WMI filter named with "Workstations" to specific WQL query
-
-.NOTES
-Domain administrator priviledge is required for executing this cmdlet.
-Either -Expression or -Description should be assigned when executing.
 
 #>
     Param
@@ -342,9 +332,6 @@ Output the renamed WMI filter instance with this switch.
 Rename-GPWmiFilter -Name 'Workstations' -TargetName 'Client Machines'
 
 Rename WMI filter "Workstations" to "Client Machines"
-
-.NOTES
-Domain administrator priviledge is required for executing this cmdlet.
 
 #>
     Param
