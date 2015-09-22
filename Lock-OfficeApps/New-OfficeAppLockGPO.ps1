@@ -1,9 +1,9 @@
-﻿Function Lock-OfficeApps{
+﻿Function New-OfficeAppLockGPO{
 
     Import-Module -Name grouppolicy
-
-    $GpoName = @("LockOffice2007","LockOffice2010","LockOffice2013")
-    $officeNumbers = @("12","14","15")
+   
+    $GpoName = @("LockOffice2003","LockOffice2007","LockOffice2010","LockOffice2013")   
+    $officeNumbers = @("11","12","14","15")
     $gpoCounter = 0
 
     foreach($Gpo in $GpoName){
@@ -67,4 +67,6 @@
         }
         $gpoCounter = $gpoCounter + 1
     }
+
+    
 }
