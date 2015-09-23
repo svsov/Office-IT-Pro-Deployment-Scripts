@@ -46,22 +46,29 @@ $gpo.WmiFilter = $filter
 
 Create a WMI filter for 32-bit work station and link it to a new GPO named "Test GPO".
 
+.NOTES
+Domain administrator priviledge is required for executing this cmdlet
+
 #>
    [CmdletBinding()] 
     Param
     (
-        [Parameter(Mandatory=$false, ValueFromPipelineByPropertyName=$true, Position=0)]
+        [Parameter(ValueFromPipelineByPropertyName=$true, Position=0)]
         [ValidateNotNull()]
-        [string] $Name = "OfficeWmiFilter",
+        [string] $WmiFilterName = "OfficeWmiFilter",
 
-        [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=1)]
+        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [ValidateNotNull()]
+        [string] $GpoName,
+
+        [Parameter(ValueFromPipelineByPropertyName=$true)]
         [ValidateNotNull()]
         [string[]] $Expression,
 
-        [Parameter(Mandatory=$false, ValueFromPipelineByPropertyName=$true, Position=2)]
+        [Parameter(ValueFromPipelineByPropertyName=$true)]
         [string] $Description,
 
-        [Parameter(Mandatory=$false, ValueFromPipelineByPropertyName=$true, Position=3)]
+        [Parameter(ValueFromPipelineByPropertyName=$true)]
         [switch] $PassThru
     )
     if ($Expression.Count -lt 1)
@@ -83,7 +90,7 @@ Create a WMI filter for 32-bit work station and link it to a new GPO named "Test
     }
 
     $Attr = @{
-        "msWMI-Name" = $Name;
+        "msWMI-Name" = $WmiFilterName;
         "msWMI-Parm1" = $msWMIParm1;
         "msWMI-Parm2" = $msWMIParm2;
         "msWMI-Author" = $msWMIAuthor;
@@ -105,6 +112,30 @@ Create a WMI filter for 32-bit work station and link it to a new GPO named "Test
     {
         ConvertTo-WmiFilter $ADObject | Write-Output
     }
+
+    $results = new-object PSObject[] 0;
+    $Result = New-Object –TypeName PSObject
+    Add-Member -InputObject $Result -MemberType NoteProperty -Name "GpoName" -Value $GpoName
+    Add-Member -InputObject $Result -MemberType NoteProperty -Name "WmiFilterName" -Value $WmiFilterName
+    $Result
+}
+
+function Add-GPWmiLink {
+
+    [CmdletBinding()]
+    Param(
+        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [string] $WmiFilterName = $null,
+
+        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [string] $GpoName = $null
+    )
+
+    $officeLockGpo = Get-GPO -Name $GpoName
+    $wmiFilterLink = Get-GPWmiFilter -WmiFilterName $WmiFilterName
+    $wmiLink = $officeLockGpo.WmiFilter = $wmiFilterLink
+
+    return $wmiLink
 }
 
 function Get-GPWmiFilter {
@@ -143,7 +174,7 @@ Get all WMI filters in current domain
 
         [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0, ParameterSetName="ByName")]
         [ValidateNotNull()]
-        [string[]] $Name,
+        [string[]] $WmiFilterName,
         
         [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0, ParameterSetName="GetAll")]
         [ValidateNotNull()]
@@ -153,9 +184,9 @@ Get all WMI filters in current domain
     {
         $ADObject = Get-WMIFilterInADObject -Guid $Guid
     }
-    elseif ($Name)
+    elseif ($WmiFilterName)
     {
-        $ADObject = Get-WMIFilterInADObject -Name $Name
+        $ADObject = Get-WMIFilterInADObject -WmiFilterName $WmiFilterName
     }
     elseif ($All)
     {
@@ -183,6 +214,9 @@ Remove-GPWmiFilter -Name 'Virtual Machines'
 
 Remove the WMI filter with name 'Virtual Machines'
 
+.NOTES
+Domain administrator priviledge is required for executing this cmdlet
+
 #>
    [CmdletBinding(DefaultParametersetName="ByGUID")] 
     Param
@@ -193,15 +227,15 @@ Remove the WMI filter with name 'Virtual Machines'
 
         [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0, ParameterSetName="ByName")]
         [ValidateNotNull()]
-        [string[]] $Name
+        [string[]] $WmiFilterName
     )
     if ($Guid)
     {
         $ADObject = Get-WMIFilterInADObject -Guid $Guid
     }
-    elseif ($Name)
+    elseif ($WmiFilterName)
     {
-        $ADObject = Get-WMIFilterInADObject -Name $Name
+        $ADObject = Get-WMIFilterInADObject -WmiFilterName $WmiFilterName
     }
     $ADObject | ForEach-Object  {
         if ($_.DistinguishedName)
@@ -239,6 +273,10 @@ Set-GPWmiFilter -Name 'Workstations' -Expression 'SELECT * FROM Win32_OperatingS
 
 Set WMI filter named with "Workstations" to specific WQL query
 
+.NOTES
+Domain administrator priviledge is required for executing this cmdlet.
+Either -Expression or -Description should be assigned when executing.
+
 #>
     Param
     (
@@ -248,7 +286,7 @@ Set WMI filter named with "Workstations" to specific WQL query
 
         [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0, ParameterSetName="ByName")]
         [ValidateNotNull()]
-        [string[]] $Name,
+        [string[]] $WmiFilterName,
         
         [Parameter(Mandatory=$false, ValueFromPipelineByPropertyName=$true, Position=1)]
         [ValidateNotNull()]
@@ -265,9 +303,9 @@ Set WMI filter named with "Workstations" to specific WQL query
     {
         $ADObject = Get-WMIFilterInADObject -Guid $Guid
     }
-    elseif ($Name)
+    elseif ($WmiFilterName)
     {
-        $ADObject = Get-WMIFilterInADObject -Name $Name
+        $ADObject = Get-WMIFilterInADObject -WmiFilterName $WmiFilterName
     }
     $msWMIAuthor = Get-Author
     $msWMIChangeDate = (Get-Date).ToUniversalTime().ToString("yyyyMMddhhmmss.ffffff-000")
@@ -333,6 +371,9 @@ Rename-GPWmiFilter -Name 'Workstations' -TargetName 'Client Machines'
 
 Rename WMI filter "Workstations" to "Client Machines"
 
+.NOTES
+Domain administrator priviledge is required for executing this cmdlet.
+
 #>
     Param
     (
@@ -342,7 +383,7 @@ Rename WMI filter "Workstations" to "Client Machines"
 
         [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0, ParameterSetName="ByName")]
         [ValidateNotNull()]
-        [string[]] $Name,
+        [string[]] $WmiFilterName,
         
         [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=1)]
         [ValidateNotNull()]
@@ -357,14 +398,14 @@ Rename WMI filter "Workstations" to "Client Machines"
     }
     elseif ($Name)
     {
-        $ADObject = Get-WMIFilterInADObject -Name $Name
+        $ADObject = Get-WMIFilterInADObject -WmiFilterName $WmiFilterName
     }
 
-    if (!$Name)
+    if (!$WmiFilterName)
     {
-        $Name = $ADObject."msWMI-Name"
+        $WmiFilterName = $ADObject."msWMI-Name"
     }
-    if ($TargetName -eq $Name)
+    if ($TargetName -eq $WmiFilterName)
     {
         return
     }
@@ -444,7 +485,7 @@ function Get-WMIFilterInADObject {
 
         [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0, ParameterSetName="ByName")]
         [ValidateNotNull()]
-        [string[]] $Name,
+        [string[]] $WmiFilterName,
         
         [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0, ParameterSetName="GetAll")]
         [ValidateNotNull()]
@@ -459,9 +500,9 @@ function Get-WMIFilterInADObject {
             Get-ADObject -LDAPFilter $ldapFilter -Properties $wmiFilterAttr | Write-Output
         }
     }
-    elseif ($Name)
+    elseif ($WmiFilterName)
     {
-        $Name | ForEach-Object {
+        $WmiFilterName | ForEach-Object {
             $ldapFilter = "(&(msWMI-Name=$_))"
             Get-ADObject -LDAPFilter $ldapFilter -Properties $wmiFilterAttr | Write-Output
         }
