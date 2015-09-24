@@ -1,25 +1,46 @@
-﻿Add-Type -TypeDefinition @"
-   public enum OfficeVersion
-   {
-      Office2003,
-      Office2007,
-      Office2010,
-      Office2013
-   }
-"@
+﻿Function New-OfficeAppLockGPO{
+<#
+.SYNOPSIS
+Creates a group policy that will lock the specified version of Office.
 
-function New-OfficeAppLockGPO{
+.DESCRIPTION
+This function will create a GPO that will block Office applications older than 2016
+from opening by providing the version/s of Office. If the GPO name and WMI filter name are not
+provided a default name will be created. The WMI filter will be automatically linked
+to the corresponding GPO.
+
+.PARAMETER GpoName
+Name of the new GPO.
+
+.PARAMETER OfficeVersion
+The version of Office to block.
+
+.EXAMPLE
+New-OfficeAppLockGPO -GpoName "Lock Office 2010,2013" -OfficeVersion Office2010,Office2013
+A GPO and WMi filter called "Lock Office 2010,2013" will be created and linked. When applied to
+the appropriate OU any computer with Office 2010 and 2016 or 2013 and 2016 will be prevented
+from opening the version older than 2016.
+
+.NOTE
+This function will dot source the Manage-OfficeWmiFilters.ps1 script. Be sure both scripts
+are saved in the same folder.
+#>
 
     [CmdletBinding()]
     Param(
-        [Parameter(ValueFromPipelineByPropertyName=$true, Position=0)]
+        [Parameter(ValueFromPipelineByPropertyName=$true)]
         [string] $GpoName = $null,
 
         [Parameter(ValueFromPipelineByPropertyName=$true)]
-        [OfficeVersion[]] $OfficeVersion
+        [string] $WmiFilterName = $GpoName,
+
+        [ValidateSet("Office2003", "Office2007", "Office2010","Office2013")]
+        [string[]] $OfficeVersion
     )
 
     Import-Module -Name grouppolicy
+
+    . .\Manage-OfficeWmiFilters.ps1
 
     $dateconv = Get-Date -Format G
     $date = (Get-date $dateconv).TofileTime()
@@ -45,7 +66,19 @@ function New-OfficeAppLockGPO{
                             "C:\Program Files (x86)\Microsoft Office\Office$($officeNumbers[$gpoCounter])\MSACCESS.EXE",
                             "C:\Program Files\Microsoft Office\Office$($officeNumbers[$gpoCounter])\MSACCESS.EXE",
                             "C:\Program Files (x86)\Microsoft Office\Office$($officeNumbers[$gpoCounter])\EXCEL.EXE",
-                            "C:\Program Files\Microsoft Office\Office$($officeNumbers[$gpoCounter])\EXCEL.EXE")
+                            "C:\Program Files\Microsoft Office\Office$($officeNumbers[$gpoCounter])\EXCEL.EXE"
+                            "C:\Program Files (x86)\Microsoft Office\Office$($officeNumbers[$gpoCounter])\INFOPATH.EXE",
+                            "C:\Program Files\Microsoft Office\Office$($officeNumbers[$gpoCounter])\INFOPATH.EXE"
+                            "C:\Program Files (x86)\Microsoft Office\Office$($officeNumbers[$gpoCounter])\WINPROJ.EXE",
+                            "C:\Program Files\Microsoft Office\Office$($officeNumbers[$gpoCounter])\WINPROJ.EXE"
+                            "C:\Program Files (x86)\Microsoft Office\Office$($officeNumbers[$gpoCounter])\MSPUB.EXE",
+                            "C:\Program Files\Microsoft Office\Office$($officeNumbers[$gpoCounter])\MSPUB.EXE"
+                            "C:\Program Files (x86)\Microsoft Office\Office$($officeNumbers[$gpoCounter])\SPDESIGN.EXE",
+                            "C:\Program Files\Microsoft Office\Office$($officeNumbers[$gpoCounter])\SPDESIGN.EXE"
+                            "C:\Program Files (x86)\Microsoft Office\Office$($officeNumbers[$gpoCounter])\GROOVE.EXE",
+                            "C:\Program Files\Microsoft Office\Office$($officeNumbers[$gpoCounter])\GROOVE.EXE"
+                            "C:\Program Files (x86)\Microsoft Office\Office$($officeNumbers[$gpoCounter])\VISLIB.DLL",
+                            "C:\Program Files\Microsoft Office\Office$($officeNumbers[$gpoCounter])\VISLIB.DLL")
 
             $appLocations = @("%HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRoot%",
                               "%HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir%")
@@ -135,14 +168,104 @@ function New-OfficeAppLockGPO{
         }             
     }
 
+        if($OfficeVersion -contains "Office2003")        
+        {
+            if($OfficeVersion -contains "Office2007")
+            {
+                if($OfficeVersion -contains "Office2010")
+                {
+                    if($OfficeVersion -contains "Office2013")
+                    {
+                        $WqlQuery = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "11.0%" OR Version LIKE "12.%" OR Version LIKE "14.0%" OR Version LIKE "15.0%"'
+                    }
+                    else
+                    {
+                        $WqlQuery = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "11.0%" OR Version LIKE "12.%" OR Version LIKE "14.0%"'
+                    }
+                }      
+                else
+                {
+                    $WqlQuery = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "11.0%" OR Version LIKE "12.%"'
+                }
+            }
+            elseif($OfficeVersion -contains "Office2010")
+            {
+                if($OfficeVersion -contains "Office2013")
+                {
+                    $WqlQuery = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "11.0%" OR Version LIKE "14.%" OR Version LIKE "15.0%"'
+                }
+                else
+                {
+                    $WqlQuery = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "11.0%" OR Version LIKE "14.%"'
+                }
+            }
+            elseif($OfficeVersion -contains "Office2013")
+            {
+                $WqlQuery = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "11.0%" OR Version LIKE "15.0%"'
+            }
+            else
+            {
+                $WqlQuery = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "11.0%"'
+            }
+        }
+        
+        elseif($OfficeVersion -contains "Office2007")
+        {
+            if($OfficeVersion -contains "Office2010")
+            {
+                if($OfficeVersion -contains "Office2013")
+                {
+                    $WqlQuery = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "12.0%" OR Version LIKE "14.%" OR Version LIKE "15.0%"'
+                }
+                else
+                {
+                    $WqlQuery = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "12.0%" OR Version LIKE "14.%"'
+                }
+            }
+            elseif($OfficeVersion -contains "Office2013")
+            {
+                $WqlQuery = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "12.0%" OR Version LIKE "15.0%"'
+            }
+            else
+            {
+                $WqlQuery = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "12.0%"'
+            }
+        }
+        elseif($OfficeVersion -contains "Office2010")
+        {
+            if($OfficeVersion -contains "Office2013")
+            {
+                $WqlQuery = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "14.%" OR Version LIKE "15.%"'
+            }
+            else
+            {
+                $WqlQuery = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "14.%"'
+            }
+        }            
+        elseif($OfficeVersion -eq "Office2013")
+        {         
+            $WqlQuery = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "15.%"'
+        }               
+
+
+    $Wql2016Query = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Office 16%"'        
+    [string[]]$object = $WqlQuery,$Wql2016Query
+
+    [string[]]$Expression = $object
+       
+    . .\Manage-OfficeWmiFilters.ps1
+
+    New-GPWmiFilter -WmiFilterName $WmiFilterName -Expression $Expression
+    Add-GPWmiLink -WmiFilterName $WmiFilterName -GpoName $GpoName
+
     $results = new-object PSObject[] 0;
     $Result = New-Object –TypeName PSObject
     Add-Member -InputObject $Result -MemberType NoteProperty -Name "GpoName" -Value $GpoName
-    Add-Member -InputObject $Result -MemberType NoteProperty -Name "WmiFilterName" -Value $WmiFilterName
-    $Result
+    Add-Member -InputObject $Result -MemberType NoteProperty -Name "WmiFilterName" -Value $WmiFilterName    
+    $result
 }
     
-function SetGpoPolValues{
+Function SetGpoPolValues{
                
         $appStrings = @("C:\Program Files (x86)\Microsoft Office\Office$($officeNumber)\WINWORD.EXE",
                         "C:\Program Files\Microsoft Office\Office$($officeNumber)\WINWORD.EXE",
