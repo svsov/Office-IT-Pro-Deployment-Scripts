@@ -1,18 +1,3 @@
-# Office 2003 WMI filter
-$wmi2003 = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "11.0%"'
-
-# Office 2007 WMI filter
-$wmi2007 = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "12.0%"'
-
-# Office 2010 WMI filter
-$wmi2010 = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "14.0%"'
-
-# Office 2013 WMI filter
-$wmi2013 = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND Version LIKE "15.0%"'
-
-# All Office versions older than 2016
-$wmiAll = 'SELECT * FROM Win32_Product WHERE Caption LIKE "Microsoft Office%" AND NOT Version LIKE "16.0%"'
-
 function New-GPWmiFilter {
 <#
 .SYNOPSIS
@@ -53,9 +38,9 @@ Domain administrator priviledge is required for executing this cmdlet
    [CmdletBinding()] 
     Param
     (
-        [Parameter(ValueFromPipelineByPropertyName=$true, Position=0)]
+        [Parameter(ValueFromPipelineByPropertyName=$true)]
         [ValidateNotNull()]
-        [string] $WmiFilterName = "OfficeWmiFilter",
+        [string] $WmiFilterName = $GpoName,
 
         [Parameter(ValueFromPipelineByPropertyName=$true)]
         [ValidateNotNull()]
@@ -71,6 +56,8 @@ Domain administrator priviledge is required for executing this cmdlet
         [Parameter(ValueFromPipelineByPropertyName=$true)]
         [switch] $PassThru
     )
+
+
     if ($Expression.Count -lt 1)
     {
         Write-Error "At least one Expression Method is required to create a WMI Filter."
@@ -112,12 +99,6 @@ Domain administrator priviledge is required for executing this cmdlet
     {
         ConvertTo-WmiFilter $ADObject | Write-Output
     }
-
-    $results = new-object PSObject[] 0;
-    $Result = New-Object –TypeName PSObject
-    Add-Member -InputObject $Result -MemberType NoteProperty -Name "GpoName" -Value $GpoName
-    Add-Member -InputObject $Result -MemberType NoteProperty -Name "WmiFilterName" -Value $WmiFilterName
-    $Result
 }
 
 function Add-GPWmiLink {
